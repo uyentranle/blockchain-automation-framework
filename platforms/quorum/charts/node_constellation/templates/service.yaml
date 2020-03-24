@@ -45,7 +45,7 @@ metadata:
 spec:
 {{- if eq .Values.cloudprovider "minikube" }}
   type: NodePort
-{{ else }}
+{{- else }}
   type: ClusterIP
 {{- end }}
   ports:

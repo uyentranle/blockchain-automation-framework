@@ -8,8 +8,8 @@ replicaCount: 1
 metadata:
   #Provide the namespace for the Quorum node
   #Eg. namespace: example-com
-  namespace: 
-  #Provide the custom labels  
+  namespace:
+  #Provide the custom labels
   #NOTE: Provide labels other than name, release name , release service, chart version , chart name, run
   #These lables will not be applied to VolumeClaimTemplate of StatefulSet as labels are automatically picked up by Kubernetes
   #Eg. labels:
@@ -21,7 +21,7 @@ images:
   #Provide the valid image name and version for quorum node
   #Eg. node: quorumengineering/quorum:2.1.1
   node: quorumengineering/quorum:2.1.1
-  #Provide the valid image name and version to read certificates from vault server 
+  #Provide the valid image name and version to read certificates from vault server
   #Eg. alpineutils: adopfrablockchain.azurecr.io/alpine-utils:1.0
   alpineutils: adopblockchaincloud0502.azurecr.io/alpine-utils:1.0
   #Provide the valid image name and version for quorum tessera
@@ -32,23 +32,25 @@ images:
   #Provide the valid image name and version for MySQL. This is used as the DB for TM
   mysql: mysql/mysql-server:5.7
 
+cloudprovider: minikube #Options: aws, azure, gcp or minikube
+
 node:
   #Provide the name for Quorum node
   #Eg. name: node-1
-  name: 
+  name:
   #Provide the consesus for the Quorum network
   # values can be 'raft' or 'ibft'
-  #Eg. consensus: raft 
-  consensus: 
+  #Eg. consensus: raft
+  consensus:
   #Provide the mountpath for Quorum pod
   #Eg. mountPath: /etc/quorum/qdata
-  mountPath: 
+  mountPath:
   #Provide the docker secret name in the namespace
   #Eg. imagePullSecret: regcred
   imagePullSecret: regcred
   #Provide the keystore file name
   #Eg. keystore: keystore_1
-  keystore: 
+  keystore:
   #Provide the k8s service type
   servicetype: ClusterIP
   #Provide the container and service ports
@@ -60,33 +62,33 @@ node:
     db: 3306
   #Provide the mysql DB name
   #Eg. dbname: demodb
-  dbname: 
+  dbname:
   #Provide the mysql username
   #Eg. mysqluser: demouser
-  mysqluser: 
+  mysqluser:
   #Provide the mysql user password
   #Eg. mysqlpassword: pass
-  mysqlpassword: 
+  mysqlpassword:
 
 vault:
   #Provide the Vault Address from where secrets will be read
   #Eg. address: http://vault.internal.demo.aws.blockchaincloudpoc.com:9000
-  address: 
+  address:
   #Provide the Vault secret path from where secrets will be read
   #Eg. secretprefix: secret/org1/crypto/node_1
-  secretprefix: 
+  secretprefix:
   #Provide the serviceaccount which is verified with Vault
   #Eg. serviceaccountname: vault-auth
-  serviceaccountname: 
+  serviceaccountname:
   #Provide the key name from where quorum secrets will be read
   #Eg. keyname: quorum
-  keyname: 
+  keyname:
   #Provide the key name from where transaction-manager secrets will be read
   #Eg. tm_keyname: transaction
-  tm_keyname: 
+  tm_keyname:
   #Provide the service role which is verified with Vault
   #Eg. role: vault-role
-  role: 
+  role:
   #Provide the Vault auth-path which is created for the namespace
   #Eg. authpath: quorumorg1
   authpath:
@@ -94,44 +96,44 @@ vault:
 tessera:
   #Provide the Database URL
   #Eg. dburl: jdbc:mysql://localhost:3306/demodb
-  dburl: 
+  dburl:
   #Provide the Database username
   #Eg. dbusername: $username
   dbusername:
   #Provide the Database password
   #Eg. dbpassword: $password
-  dbpassword:   
+  dbpassword:
   #Provide the tessera node's own url. This should be local. Use http if tls is OFF
   #Eg. url: "https://localhost:9001"
-  url: 
+  url:
   #Provide the list of tessera nodes to connect in url: <value> format. This should be reachable from this node
-  #Eg. othernodes: 
+  #Eg. othernodes:
   #     - url: "https://node1.quo.demo.aws.blockchaincloudpoc.com:8443"
   #     - url: "https://node2.quo.demo.aws.blockchaincloudpoc.com:8443"
-  othernodes: 
-  #Provide if tessera will use tls. 
+  othernodes:
+  #Provide if tessera will use tls.
   # Options:
   ##   - STRICT: All connections to and from this node must use TLS with mutual
-  ##     authentication. 
+  ##     authentication.
   ##   - OFF: Mutually authenticated TLS is not used for in- and outbound
   ##     connections, although unauthenticated connections to HTTPS hosts are
   ##     still possible. This should only be used if another transport security
   ##     mechanism like WireGuard is in place.
   #Eg. tls: 'STRICT'
-  tls: 
-  #Provide the server/client  trust configuration for constellation nodes. 
+  tls:
+  #Provide the server/client  trust configuration for constellation nodes.
   # options are: "WHITELIST", "CA_OR_TOFU", "CA", "TOFU"
   # Eg: trust: "TOFU"
-  trust: 
+  trust:
 
 #Provide the genesis.json file in base64 format
 #Eg. genesis: ewogICAgImFsbG9jIjogewogICAgICAgICIwOTg2Nzk2ZjM0ZDhmMWNkMmI0N2M3MzQ2YTUwYmY2
 #     OWFhOWM1NzcyIjogewogICAgICAgICAgICAiYmFsYW5jZSI6ICIxMDAwMDAwMDAwMDAwMDAwMDAw
 #     MDAwMDAwMDAwIgogICAgICAgIH0sCiAgICAgICAgImY2MjkyNTQ1YWVjNTkyMDU4MzQ
 genesis:
-      
+
 #Provide the staticnodes as an array
-#Eg. staticnodes: 
+#Eg. staticnodes:
 #  - enode://293ce022bf114b14520ad97349a1990180973885cc2afb6f4196b490397e164fabc87900736e4b685c5f4cf31479021ba0d589e58bd0ea6792ebbfd5eb0348af@node1.quo.demo.aws.blockchaincloudpoc.com:15011?discport=0&raftport=15012
 #  - enode://4e7a1a15ef6a9bbf30f8b2a6b927f4941c9e80aeeeed14cfeeea619f93256b41ef9994b9a8af371f394c2a6de9bc6930e142c0350399a22081c518ab2d27f92a@node2.quo.demo.aws.blockchaincloudpoc.com:15021?discport=0&raftport=15022
 #  - enode://947fa59385da72f4a68b7348ef5dab7e759148b48b30892c29b7b03a872233a6475a13fd5df62ea75abff9981d459606c1f878cd6ab929307eac6b56b19424bd@node3.quo.demo.aws.blockchaincloudpoc.com:15031?discport=0&raftport=15032
@@ -145,20 +147,20 @@ proxy:
   provider: "ambassador"
   #This field contains the external URL of the node
   #Eg. external_url: node1.quo.demo.aws.blockchaincloudpoc.com
-  external_url: 
+  external_url:
   # Following are the ports that are exposed externally via the proxy
   portTM: 8443
   rpcport: 15030
-  quorumport: 15031  
+  quorumport: 15031
   portRaft: 15032
 
 storage:
   #Provide the kubernetes storageclass for node
   #Eg. storageclassname: awsstorageclass
-  storageclassname: 
+  storageclassname:
   #Provide the memory for node
   #Eg. storagesize: 1Gi
-  storagesize: 
+  storagesize:
   #Provide the memory for database
   #Eg. dbstorage: 1Gi
-  dbstorage: 
+  dbstorage:
