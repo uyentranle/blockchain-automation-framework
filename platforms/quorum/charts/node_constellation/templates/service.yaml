@@ -43,7 +43,6 @@ metadata:
     {{- include "labels.custom" . | nindent 2 }}
   name: {{ .Values.node.name }}
 spec:
-  type: {{ .Values.node.servicetype }}
 {{- if eq .Values.cloudprovider "minikube" }}
   type: NodePort
 {{ else }}
